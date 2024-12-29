@@ -44,7 +44,9 @@ function _write(){ // JS함수중에 내장된 write함수가 존재하므로 �
                 alert('write success');
                 findAll();
             }
-            else{alert('write fail')}
+            else{
+                alert('write fail');
+            }
         })
         .catch(error => {console.log(error)}) // .catch(매개변수명 => {오류결과 코드;})
 }//f end
