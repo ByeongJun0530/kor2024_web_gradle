@@ -1,19 +1,8 @@
-
+let todoList = [];
+let todoNum = 1;
 // [3 C] 등록함수 정의, 
 // 사용처 : [등록]버튼 onclick 클릭시, 매개변수 : X, 반환값 : X 
 function todoWrite(){
-    // option
-    let option = {
-        method : "POST",
-        headers : {'Content-Type':'application/json'},
-        body : JSON.stringify(todo)
-    }
-    // fetch
-    fetch('/todoWrite',option)
-        .then(r => r.json())
-        .then(d => console.log(d))
-        .catch(e => console.log(e))
-    
     // 1. HTML로부터 INPUT 마크업 DOM 객체 가져오기 
     const contInput = document.querySelector('.contInput'); console.log(contInput);
     
@@ -26,10 +15,23 @@ function todoWrite(){
         todoState : false,
     };                                                     console.log(todo);
     // 4. 구성한 객체를 배열에 저장한다. 
-    todoContent.push(todo);                                    console.log(todoList);
+    todoList.push(todo);                                    console.log(todoList);
+    // option
+    let option = {
+        method : "POST",
+        headers : {'Content-Type':'application/json'},
+        body : JSON.stringify(todo)
+    }
+    // fetch
+    fetch('/todoWrite',option)
+        .then(r => r.json())
+        .then(d => console.log(d))
+        .catch(e => console.log(e))
+    
     // 5. 결과 
     alert('[할일 등록 되었습니다.]')
     contInput.value = ``;
+    todoNum++;
     todoPrint(); // 등록 성공시 출력함수 호출(출력상태 새로고침)
     return; // 함수 종료 
 }
@@ -38,11 +40,6 @@ function todoWrite(){
 // 사용처 : JS가 실행될때 JS에서 최초1번 실행, 등록/수정/삭제 성공했을 때, 매개변수 : X, 반환값 : X 
 todoPrint(); // JS에서 출력함수를 호출
 function todoPrint(){
-    // fetch
-    fetch('/todoPrint')
-        .then(r => r.json())
-        .then(d => console.log(d))
-        .catch(e => console.log(e))  
     // 1. HTML로부터 DIV 마크업 DOM 객체 가져오기 
     const todoBottom = document.querySelector('.todoBottom');
     // 2. 출력할 HTML문자열 구성하기 
@@ -60,24 +57,23 @@ function todoPrint(){
                     <div class="cont"> ${todo.todoContent} </div>
                     <div class="contBtns"> 
                         <button onclick="todoUpdate(${todo.todoNum})" class="updateBtn">수정</button>
-                        <button onclick="삭제함수(${todo.todoNum})" class="deleteBtn">삭제</button>
+                        <button onclick="todoDelete(${todo.todoNum})" class="deleteBtn">삭제</button>
                     </div>
                 </div>` 
         }
     // 3. 가져온 마크업 객체에 출력할 html문자열 대입하기 
     todoBottom.innerHTML = HTML;
+    // fetch
+    fetch('/todoPrint')
+        .then(r => r.json())
+        .then(d => console.log(d))
+        .catch(e => console.log(e))  
 }
 
 // [5 U] 수정함수 정의, 상태 변경 
 // 사용처 : [수정]버튼 onclick 클릭시, 매개변수 : 수정할 할일 코드, 반환값 : X 
 function todoUpdate(todoNum){ console.log(`${todoNum}todoUpdate`)
-    // fetch
-    fetch(`/todoUpdate`,{
-        method : "PUT", headers : {'Content-Type':'application/json'}, body : JSON.stringify(todoList)
-    })
-        .then(r => r.json())
-        .then(d => console.log(d))
-        .catch(e => console.log(e))  
+
     // (1) 배열 내 수정할 할일코드 객체 찾기.
     for(let index = 0;index <= todoList.length-1; index++){
         if(todoList[index].todoNum == todoNum){
@@ -87,17 +83,21 @@ function todoUpdate(todoNum){ console.log(`${todoNum}todoUpdate`)
              break; // 수정했다면 for문 종료 
         }
     }
+    // fetch
+    const updatedTodo = todoList.find(todo => todo.todoNum === todoNum)
+    fetch(`/todoUpdate`,{
+        method : "PUT", headers : {'Content-Type':'application/json'}, body : JSON.stringify(updatedTodo)
+    })
+        .then(r => r.json())
+        .then(d => console.log(d))
+        .catch(e => console.log(e))  
+
     todoPrint(); // 수정처리 후 출력함수 재호출 함으로써 (출력상태 새로고침)
 }
 
 // [6 D] 삭제함수 정의,
 // 사용처 : [삭제]버튼 onclick 클릭시, 매개변수 : 삭제할 할일 코드, 반환값 : X 
 function todoDelete(todoNum){ console.log(`${todoNum}todoDelete`)
-    // fetch
-    fetch(`/todoDelete?todoNum=${todoNum}`,{method : 'Delete'})
-        .then(r => r.json())
-        .then(d => console.log(d))
-        .catch(e => console.log(e))  
     // (1) 배열 내 삭제할 할일 코드 객체 찾기.
     for(let index = 0; index <= todoList.length-1; index++){
         if(todoList[index].todoNum == todoNum){
@@ -106,5 +106,12 @@ function todoDelete(todoNum){ console.log(`${todoNum}todoDelete`)
             break; // 삭제시 for문 종료 
         }
     }
+
+    // fetch
+    fetch(`/todoDelete?todoNum=${todoNum}`,{method : 'Delete'})
+        .then(r => r.json())
+        .then(d => console.log(d))
+        .catch(e => console.log(e))  
+
     todoPrint(); // 삭제처리 후 출력함수 재호출 함으로써 (출력상태 새로고침)
 }
