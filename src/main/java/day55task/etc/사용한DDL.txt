@@ -1,0 +1,17 @@
+drop database if exists day55Task;
+create database day55Task;
+use day55Task;
+
+# 테이블 생성
+create table todoList(
+	todoNum int unsigned auto_increment,
+    todoContent varchar(30) not null,
+    todoState boolean default true,
+    primary key(todoNum)
+);
+
+insert into todoList(todoContent, todoState) values ("공부하기", true);
+insert into todoList(todoContent, todoState) values ("밥먹기", false);
+insert into todoList(todoContent, todoState) values ("노래듣기", false);
+
+select* from todoList;

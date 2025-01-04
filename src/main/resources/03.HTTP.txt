@@ -38,6 +38,15 @@
         1. [크롬 브라우저 ] -> [확장 프로그램 ] -> 'talend api' 클릭 ( 없으면 설치가 안된 상태 )
         2. HTTP URL 테스트 하기
 
+    9. HTTP 이용한 데이터 주고 받기
+        request     요청
+            + 데이터를 보내는 방법 2가지
+            (1) 쿼리스트링 방식 , url 경로상의 ? 이용하여 경로와 매개변수 구분
+                URL ? 매개변수명1 = 값1 & 매개변수명2 = 값2
+                http://localhost:8080/findid?bno=1
+            (2) body 방식
+        response    응답
+
 [ 실습1 ] spring web 에서 post , get , put , delete 메소드를 사용하여 HTTP 통신 주소 만들기
                                     내PC , 톰캣서버
        사용자 --------------------> SPRING WEB
