@@ -1,0 +1,10 @@
+[과제]
+    회원가입, 로그인, 회원수정, 회원탈퇴 기능의 Rest API Controller 구축
+    1. MemberController 1개 선언, MemberDto 1개 선언
+    2. 회원가입 : @PostMapping
+    3. 로그인 : @PostMapping
+    4. 회원수정 : @PutMapping
+    5. 내정보보기 : @GetMapping
+    6. 회원탈퇴 : @DeleteMapping
+    7. Dto의 멤버변수 : 회원번호, 아이디, 비밀번호, 이름, 전화번호
+    힌트] 각 기능별 1. URL정의, 2.쿼리스트링/BODY 선택 3.매개변수/리턴값 => REST API 정의 명세서

@@ -38,14 +38,37 @@
         1. [크롬 브라우저 ] -> [확장 프로그램 ] -> 'talend api' 클릭 ( 없으면 설치가 안된 상태 )
         2. HTTP URL 테스트 하기
 
-    9. HTTP 이용한 데이터 주고 받기
-        request     요청
-            + 데이터를 보내는 방법 2가지
-            (1) 쿼리스트링 방식 , url 경로상의 ? 이용하여 경로와 매개변수 구분
-                URL ? 매개변수명1 = 값1 & 매개변수명2 = 값2
-                http://localhost:8080/findid?bno=1
-            (2) body 방식
-        response    응답
+     9. HTTP를 이용한 데이터를 통신
+                request     요청
+                    + 데이터 보내는 방법 2가지
+                        (1) 쿼리스트링 방식 , url 경로상의 ? 이용하여 경로 와 매개변수 구분 , HTTP method 의 모든 메소드 사용.
+                            1.URL ? 매개변수명1=값1 & 매개변수명2=값2
+                                - http://localhost:8080/findid?bno=1
+                                - https://bymono.com/product/detail.html?product_no=30188&cate_no=1&display_group=30
+                                    https://bymono.com/product/detail.html : html이 위치한 경로
+                                    ? 부터 쿼리스트링 시작된다. product_no=30188 , cate_no=1 , &display_group=30  매개변수 3개
+                            2. 자바 Controller 메소드 에서 URL 상의 쿼리스트링 매개변수 반환방법
+                                - 메소드명( @RequestParam 타입 매개변수명 ){ }
+                                - 메소드명( 타입 매개변수명 ){ }
+                                    - http://localhost:8080/findid?bno=1
+                                    - 메소드명( int bno ) {}
+
+                        (2) body 방식 , HTTP header 안에 내용물 추가하는 방법
+                            - HTTP method의 POST 와 PUT 에서만 지원하는 기능. 즉] GET, DELETE는 body 를 지원하지 않는다.
+                            1. 쿼리스트링 과 다르게 URL 경로상의 데이터를 표시하지 않는다. [ 쿼리스트링 방식보다 보안성이 좋다. ]
+                                - body의 content-type 명시하여 데이터를 보내준다.
+                                - 주로 content-type : 'application/json'        : JSON( 자바스크립트 객체 )
+                            2. content-type : 'application/json' 으로 하고 body 에 { '속성명':값 , '속성명' : 값 }
+                            3. 자바 Controller 메소드 에서 body 의 데이터를 매개변수로 반환 방법
+                                - 메소드명( @RequestBody 타입 매개변수명 ) { }
+
+                response    응답
+
+        10. HTTP 이용한 통신 라이브러리
+            0. [크롬] talend api , 테스트용도.
+            1. [JS] Fetch
+            2. [JQUERY] AJAX
+            3. [JS] AXIOS
 
 [ 실습1 ] spring web 에서 post , get , put , delete 메소드를 사용하여 HTTP 통신 주소 만들기
                                     내PC , 톰캣서버
