@@ -1,7 +1,7 @@
-package day57task.controller;
+package day58task.controller;
 
-import day57task.model.dto.StudentDto;
-import day57task.service.StudentService;
+import day58task.model.dto.StudentDto;
+import day58task.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

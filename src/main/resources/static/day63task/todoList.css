@@ -1,0 +1,43 @@
+.wrap{
+    width : 400px;
+    margin : 0 auto;
+}
+
+.title{
+    text-align : center;
+}
+
+.todoTop{
+    display : flex;
+    flex-direction : row;
+}
+
+.contInput{
+    width : 300px;
+    padding : 15px;
+    border : none;
+    box-shadow : 0px 0px 3px skyblue;
+}
+
+.addBtn{
+    width : 100px; padding : 15px;
+    border : none; box-shadow : 0px 0px 3px skyblue;
+}
+
+.contBox{
+    display : flex;
+    flex-direction : row;
+    justify-content : space-between;
+    align-items : center;
+    background-color : skyblue;
+    margin : 20px 0px;
+    padding : 15px 10px;
+}
+
+.success{
+    background-color : grey;
+    color : white;
+}
+.success > .cont{
+    text-decoration : line-through;
+}
