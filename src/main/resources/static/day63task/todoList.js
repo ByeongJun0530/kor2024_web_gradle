@@ -3,13 +3,13 @@ let todoList = [];
 function todoWrite(){
     const contInput = document.querySelector('.contInput');
     const todoContent = contInput.value;
-    const todo = {
+    const todo = { console.log(todo);
         todoContent : todoContent,
         todoState : false
     }
     let option = {
         method : "POST",
-        headers : {'Content-Type' : 'applicaton/json'},
+        headers : {'Content-Type' : 'application/json'},
         body : JSON.stringify(todo)
     }   
     fetch('/todoWrite', option)
